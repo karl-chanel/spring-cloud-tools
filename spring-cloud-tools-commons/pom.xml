@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>spring-cloud-tools-commons</artifactId>
+    <version>${revision}</version>
+
+    <parent>
+        <groupId>io.github.karl-chanel</groupId>
+        <artifactId>spring-cloud-tools-dependencies</artifactId>
+        <version>${revision}</version>
+        <relativePath>../spring-cloud-tools-dependencies</relativePath>
+    </parent>
+    <packaging>pom</packaging>
+    <modules>
+        <module>spring-cloud-tools-routing-servlet</module>
+        <module>spring-cloud-tools-apiversioning</module>
+        <module>spring-cloud-tools-routing-gateway</module>
+        <module>spring-cloud-tools-core</module>
+        <module>spring-cloud-tools-admin</module>
+    </modules>
+
+    <properties>
+        <main.basedir>${basedir}/..</main.basedir>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${maven-flatten-plugin.version}</version>
+                <inherited>true</inherited>
+                <executions>
+                    <execution>
+                        <!-- Tidy up all POMs before they are published -->
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                        <configuration>
+                            <updatePomFile>true</updatePomFile>
+                            <flattenMode>oss</flattenMode>
+                            <pomElements>
+                                <parent>expand</parent>
+                                <distributionManagement>remove</distributionManagement>
+                                <repositories>remove</repositories>
+                            </pomElements>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

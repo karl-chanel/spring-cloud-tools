@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.github.karl-chanel</groupId>
+    <artifactId>spring-cloud-tools-commons</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <groupId>io.github.karl-chanel</groupId>
+  <artifactId>spring-cloud-tools-routing-gateway</artifactId>
+  <version>1.0.0</version>
+  <description>spring-cloud-tools</description>
+  <url>https://github.com/karl-chanel/sentinel-prometheus-exporter/spring-cloud-tools-commons/spring-cloud-tools-routing-gateway</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>jaspersteel</name>
+      <email>jaspersteelxx@gmail.com</email>
+      <organization>https://github.com/karl-chanel</organization>
+      <timezone>+8</timezone>
+    </developer>
+  </developers>
+  <scm>
+    <connection>https://github.com/karl-chanel/sentinel-prometheus-exporter/spring-cloud-tools-commons/spring-cloud-tools-routing-gateway</connection>
+    <developerConnection>https://github.com/karl-chanel/sentinel-prometheus-exporter/spring-cloud-tools-commons/spring-cloud-tools-routing-gateway</developerConnection>
+    <url>https://github.com/karl-chanel/sentinel-prometheus-exporter/spring-cloud-tools-commons/spring-cloud-tools-routing-gateway</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+      <version>4.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.30</version>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>3.2.1</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+</project>
