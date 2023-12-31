@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -55,7 +56,7 @@ public class SecuritySecureConfig {
                         (formLogin) -> formLogin.loginPage(this.adminServer.path("/login")).successHandler(successHandler))
                 .logout((logout) -> logout.logoutUrl(this.adminServer.path("/logout")))
                 .httpBasic(Customizer.withDefaults());
-        http.csrf().disable();
+        http.csrf(AbstractHttpConfigurer::disable);
 
 //        http.addFilterAfter(new CustomCsrfFilter(), BasicAuthenticationFilter.class)
 //                .csrf((csrf) -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())

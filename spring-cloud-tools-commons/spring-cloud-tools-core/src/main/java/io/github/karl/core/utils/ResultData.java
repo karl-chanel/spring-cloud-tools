@@ -2,11 +2,7 @@ package io.github.karl.core.utils;
 
 import lombok.Data;
 
-/**
- * @author jasper
- * @email jaspersteelxx@gmail.com
- * @create 2023-11-01 12:27
- **/
+
 @Data
 public class ResultData<T> {
     /** 结果状态 ,具体状态码参见ResultData.java*/

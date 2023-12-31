@@ -6,146 +6,12 @@
     <artifactId>spring-cloud-tools-dependencies</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
+    <name>spring-cloud-tools-dependencies</name>
     <parent>
         <groupId>io.github.karl-chanel</groupId>
         <artifactId>spring-cloud-tools</artifactId>
         <version>${revision}</version>
     </parent>
-    <modules>
-        <module>../spring-cloud-tools-commons</module>
-    </modules>
-    <properties>
-        <main.basedir>${basedir}/..</main.basedir>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-boot.version>3.2.1</spring-boot.version>
-        <spring-cloud.version>2023.0.0</spring-cloud.version>
-        <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
-        <spring-boot-admin.version>3.1.8</spring-boot-admin.version>
-        <!-- maven dependencies version start -->
-        <maven-flatten-plugin.version>1.4.1</maven-flatten-plugin.version>
-        <maven-xml-plugin.version>1.0.2</maven-xml-plugin.version>
-        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-        <maven-helper-plugin.version>3.3.0</maven-helper-plugin.version>
-        <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
-        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
-        <!-- maven dependencies version end -->
-    </properties>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <version>${maven-flatten-plugin.version}</version>
-                <inherited>false</inherited>
-                <executions>
-                    <execution>
-                        <!-- Create an effective POM (with versions expanded) for the CLI and
-                            documentation -->
-                        <id>flatten-effective-pom</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                        <configuration>
-                            <updatePomFile>false</updatePomFile>
-                            <outputDirectory>${project.build.directory}/effective-pom</outputDirectory>
-                            <flattenedPomFilename>spring-cloud-tools-dependencies.xml</flattenedPomFilename>
-                            <flattenMode>oss</flattenMode>
-                            <pomElements>
-                                <dependencyManagement>expand</dependencyManagement>
-                                <pluginManagement>expand</pluginManagement>
-                                <properties>remove</properties>
-                                <repositories>remove</repositories>
-                            </pomElements>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <!-- Flatten and simplify our own POM for install/deploy -->
-                        <id>flatten</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                        <configuration>
-                            <updatePomFile>true</updatePomFile>
-                            <flattenMode>bom</flattenMode>
-                            <pomElements>
-                                <pluginManagement>keep</pluginManagement>
-                                <properties>keep</properties>
-                                <repositories>remove</repositories>
-                            </pomElements>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>flatten-clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>xml-maven-plugin</artifactId>
-                <version>${maven-xml-plugin.version}</version>
-                <inherited>false</inherited>
-                <executions>
-                    <execution>
-                        <!-- Cleanup the effective POM -->
-                        <id>post-process-effective-pom</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>transform</goal>
-                        </goals>
-                        <configuration>
-                            <transformationSets>
-                                <transformationSet>
-                                    <dir>${project.build.directory}/effective-pom</dir>
-                                    <outputDir>${project.build.directory}/effective-pom</outputDir>
-                                    <stylesheet>src/main/xslt/post-process-flattened-pom.xsl</stylesheet>
-                                    <outputProperties>
-                                        <outputProperty>
-                                            <name>indent</name>
-                                            <value>yes</value>
-                                        </outputProperty>
-                                    </outputProperties>
-                                </transformationSet>
-                            </transformationSets>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <!-- Cleanup the flattened project POM -->
-                        <id>post-process-flattened-pom</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>transform</goal>
-                        </goals>
-                        <configuration>
-                            <transformationSets>
-                                <transformationSet>
-                                    <dir>${project.basedir}</dir>
-                                    <outputDir>${project.basedir}</outputDir>
-                                    <includes>.flattened-pom.xml</includes>
-                                    <stylesheet>src/main/xslt/post-process-flattened-pom.xsl</stylesheet>
-                                    <outputProperties>
-                                        <outputProperty>
-                                            <name>indent</name>
-                                            <value>yes</value>
-                                        </outputProperty>
-                                    </outputProperties>
-                                </transformationSet>
-                            </transformationSets>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -172,34 +38,6 @@
                 <groupId>io.github.karl-chanel</groupId>
                 <artifactId>spring-cloud-tools-routing-servlet</artifactId>
                 <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-dependencies</artifactId>
-                <version>${spring-boot-admin.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

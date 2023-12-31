@@ -3,11 +3,7 @@ package io.github.karl.core.utils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-/**
- * @author jasper
- * @email jaspersteelxx@gmail.com
- * @create 2023-11-01 12:28
- **/
+
 @Getter
 @AllArgsConstructor
 public enum ReturnCode {

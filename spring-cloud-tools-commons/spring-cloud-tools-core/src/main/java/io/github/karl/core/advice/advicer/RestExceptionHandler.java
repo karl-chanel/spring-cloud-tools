@@ -8,11 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-/**
- * @author jasper
- * @email jaspersteelxx@gmail.com
- * @create 2023-11-01 12:43
- **/
+
 @Slf4j
 @RestControllerAdvice
 public class RestExceptionHandler {
